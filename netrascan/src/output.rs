@@ -6,6 +6,8 @@ use std::path::Path;
 use serde::Serialize;
 use serde_json::{to_string, to_writer_pretty};
 
+use crate::error::Result;
+
 pub fn append_jsonl<T>(path: &str, data: &T) -> std::io::Result<()>
 where
     T: ?Sized + Serialize,
@@ -31,13 +33,14 @@ pub fn append_address_jsonl(path: &str, addresses: &HashSet<String>) -> std::io:
     Ok(())
 }
 
-pub fn write_json<P, T>(path: P, value: &T) -> std::io::Result<()>
+pub fn write_json<P, T>(path: P, value: &T) -> Result<()>
 where 
     P: AsRef<Path>,
     T: Serialize,
 {
     let file = File::create(path)?;
     let writer = BufWriter::new(file);
-    to_writer_pretty(writer, value)
-        .map_err(std::io::Error::other)
+    to_writer_pretty(writer, value)?;
+
+    Ok(())
 }
