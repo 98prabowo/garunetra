@@ -1,0 +1,9 @@
+[package]
+name = "netratrace"
+version = "0.1.0"
+edition = "2021"
+author = ["Garunetra Labs"]
+description = "On-chain wallet relationship and trace analyzer for Garunetra"
+license = "MIT"
+
+[dependencies]
