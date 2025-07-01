@@ -1,0 +1,18 @@
+[package]
+name = "netraflow"
+version = "0.1.0"
+edition = "2021"
+author = ["Garunetra Labs"]
+description = "Capital flow aggregator and reporter for Garunetra"
+license = "MIT"
+
+[dependencies]
+common = { path = "../common", version = "0.1.0" }
+
+# External dependencies
+chrono = { workspace = true }
+clap = { workspace = true }
+csv = { workspace = true }
+rayon = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
