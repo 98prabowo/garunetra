@@ -11,15 +11,11 @@
     },
     {
       "name": "OKX",
-      "address": "0x5c985E89DeBDF3E6FB595B03f6AaDcbBa2fBfD1E"
+      "address": "0xa7efae728d2936e78bda97dc267687568dd593f3"
     },
     {
       "name": "KuCoin",
       "address": "0x8f22f2063d253846b53609231ed80fa571bc0c8f"
-    },
-    {
-      "name": "Bybit",
-      "address": "0x1d1b184799f05f4bd933e3d9e7b39e3f2b4b8b03"
     }
   ]
 }
