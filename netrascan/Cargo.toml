@@ -1,0 +1,19 @@
+[package]
+name = "netrascan"
+version = "0.1.0"
+edition = "2021"
+author = ["Garunetra Labs"]
+description = "Wallet classification engine for Garunetra"
+license = "MIT"
+
+[dependencies]
+common = { path = "../common", version = "0.1.0" }
+
+# External dependencies
+clap = { workspace = true }
+chrono = { workspace = true }
+dotenv = { workspace = true }
+reqwest = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tokio = { workspace = true }
