@@ -1,0 +1,25 @@
+{
+  "metadata": {
+    "region": "Indonesia",
+    "source": "Garunetra enrichment",
+    "last_updated": "2025-07-01"
+  },
+  "data": [
+    {
+      "name": "Indodax",
+      "address": "0x93e28F5D1E8e12B6C4D6D13900f690b3309e39Cf"
+    },
+    {
+      "name": "Pintu",
+      "address": "0xE4066363E5818C8b07e9bBD9183b17a05bB123bF"
+    },
+    {
+      "name": "Tokocrypto",
+      "address": "0x72a53cDBBcc1b9efa39c834A540550e23463AAcB"
+    },
+    {
+      "name": "Rekeningku",
+      "address": "0x66F4A5A950c5D2d63eAAb62C79bC63d6Dd91A37f"
+    }
+  ]
+}

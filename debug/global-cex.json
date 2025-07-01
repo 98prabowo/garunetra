@@ -1,0 +1,25 @@
+{
+  "metadata": {
+    "region": "Global",
+    "source": "Garunetra enrichment",
+    "last_updated": "2025-07-01"
+  },
+  "data": [
+    {
+      "name": "Binance",
+      "address": "0x28C6c06298d514Db089934071355E5743bf21d60"
+    },
+    {
+      "name": "OKX",
+      "address": "0x5c985E89DeBDF3E6FB595B03f6AaDcbBa2fBfD1E"
+    },
+    {
+      "name": "KuCoin",
+      "address": "0x8f22f2063d253846b53609231ed80fa571bc0c8f"
+    },
+    {
+      "name": "Bybit",
+      "address": "0x1d1b184799f05f4bd933e3d9e7b39e3f2b4b8b03"
+    }
+  ]
+}
