@@ -1,0 +1,54 @@
+# Rust / Cargo
+target/
+target/**  
+**/*.rs.bk
+Cargo.toml.orig
+
+# Binaries
+*.exe
+*.out
+*.bin
+*.dll
+*.so
+*.dylib
+
+# Generated or temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+*.bak
+
+# dotenv / secrets
+.env
+.env.*
+
+# OS-specific
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+._*
+
+# VSCode
+.vscode/
+
+# JetBrains IDEs
+.idea/
+*.iml
+
+# Neovim / Vim
+*.swp
+*.swo
+.netrwhist
+.session
+.tags
+*.un~
+
+# Ignore test results or CSV/JSONL output
+*.csv
+*.sqlite
+*.pdf
+*.svg
+*.jsonl
+netrascan/data/trainings/
