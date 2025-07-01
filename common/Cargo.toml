@@ -1,0 +1,11 @@
+[package]
+name = "common"
+version = "0.1.0"
+edition = "2021"
+author = ["Garunetra Labs"]
+description = "Common utility tools for Garunetra"
+license = "MIT"
+
+[dependencies]
+chrono = { workspace = true }
+serde = { workspace = true }
