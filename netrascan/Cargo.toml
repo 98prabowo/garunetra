@@ -2,7 +2,7 @@
 name = "netrascan"
 version = "0.1.0"
 edition = "2021"
-author = ["Garunetra Labs"]
+authors = ["Garunetra Labs"]
 description = "Wallet classification engine for Garunetra"
 license = "MIT"
 

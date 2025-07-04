@@ -2,7 +2,7 @@
 name = "netratrace"
 version = "0.1.0"
 edition = "2021"
-author = ["Garunetra Labs"]
+authors = ["Garunetra Labs"]
 description = "On-chain wallet relationship and trace analyzer for Garunetra"
 license = "MIT"
 
