@@ -1,0 +1,2 @@
+pub const REQUEST_PERIOD: u64 = 12;
+pub const ETH_THRESHOLDS: u128 = 100_000_000_000_000_000_000; // 100 ETH in WEI

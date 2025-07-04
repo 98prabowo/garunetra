@@ -1,24 +1,41 @@
 mod aggregator;
 mod cli;
-mod input;
-mod model;
-mod reporter;
+mod constants;
+mod controller;
+mod error;
+mod monitor;
+mod storage;
 
 use clap::Parser;
 
-use aggregator::aggregate_outflow;
-use cli::Cli;
-use input::load_jsonl;
-use reporter::export_csv;
+use cli::{Cli, Command};
+use controller::{init_directory, print_latest_summary, run};
 
-fn main() {
+#[tokio::main]
+async fn main() {
     let cli = Cli::parse();
-    match cli.command.as_str() {
-        "analyze" => {
-            let records = load_jsonl(&cli.input_dir);
-            let summary = aggregate_outflow(&records);
-            export_csv("outflow_by_day.csv", &summary).expect("Failed to write CSV");
+
+    match cli.command {
+        Command::Watch {
+            rpc,
+            heuristics,
+            out,
+        } => {
+            if let Err(err) = run(&rpc, heuristics, out).await {
+                eprintln!("❌ Watch error: {err}");
+            }
         }
-        _ => eprintln!("Unsupported command: {}", cli.command),
+        Command::Summary { input, latest } => {
+            if let Err(err) = print_latest_summary(input, latest) {
+                eprintln!("❌ Summary error: {err}");
+            }
+        }
+        Command::Init { dir } => {
+            if let Err(err) = init_directory(&dir) {
+                eprintln!("❌ Init error: {err}");
+            } else {
+                println!("✅ Initialized directory: {dir}");
+            }
+        }
     }
 }
