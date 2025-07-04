@@ -3,6 +3,7 @@ use serde::Deserialize;
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TxResponse {
+    pub block_number: String,
     pub from: String,
     pub to: String,
     pub token_symbol: String,

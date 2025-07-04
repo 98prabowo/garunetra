@@ -1,4 +1,4 @@
-use common::TxResponse;
+use common::model::TxResponse;
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]

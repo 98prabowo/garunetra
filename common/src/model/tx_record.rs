@@ -1,7 +1,7 @@
 use chrono::{TimeZone, Utc};
 use serde::{Deserialize, Serialize};
 
-use crate::PriceLookupFn;
+use crate::utils::PriceLookupFn;
 
 use super::{TxResponse, TxSample};
 

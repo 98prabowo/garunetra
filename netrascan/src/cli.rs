@@ -16,6 +16,10 @@ pub struct Cli {
 
 #[derive(Subcommand)]
 pub enum Command {
+    // =========================
+    //      Wallet Interface
+    // =========================
+    
     #[command(
         about = "Analyze a single Ethereum wallet",
         long_about = "Scans a wallet using Etherscan data and applies behavioral heuristics to classify it (e.g. Domestic, Foreign, Mixer)."
@@ -26,11 +30,14 @@ pub enum Command {
 
         #[arg(long, env = "ETHERSCAN_API_KEY", help = "Etherscan API key used to fetch transaction data")]
         etherscan_key: String,
+        
+        #[arg(long, default_value_t = 0, help = "Start block number for pagination")]
+        start_block: u64,
     },
 
     #[command(
         about = "Run classification on a batch of wallet addresses",
-        long_about = "Reads a file containing wallet addresses, analyzes each one using Etherscan data, and outputs classification reports."
+        long_about= "Reads a file containing wallet addresses, analyzes each one using Etherscan data, and outputs classification reports."
     )]
     Batch {
         #[arg(value_name = "FILE", help = "Path to a file with one wallet address per line")]
@@ -38,6 +45,9 @@ pub enum Command {
 
         #[arg(long, env = "ETHERSCAN_API_KEY", help = "Etherscan API key used to fetch transaction data")]
         etherscan_key: String,
+
+        #[arg(long, default_value_t = 0, help = "Start block number for pagination")]
+        start_block: u64,
 
         #[arg(long, default_value = "netrascan/data/reports", help = "Directory to store the output JSONL reports")]
         out: String,
@@ -54,6 +64,9 @@ pub enum Command {
         #[arg(long, env = "ETHERSCAN_API_KEY", help = "Etherscan API key used to fetch transaction data")]
         etherscan_key: String,
 
+        #[arg(long, default_value_t = 0, help = "Start block number for pagination")]
+        start_block: u64,
+
         #[arg(long, default_value = "netrascan/data/trainings", help = "Directory to save the crawled wallet address list")]
         out: String,
     },
@@ -68,6 +81,9 @@ pub enum Command {
 
         #[arg(long, env = "ETHERSCAN_API_KEY", help = "Etherscan API key used to fetch transaction data")]
         etherscan_key: String,
+
+        #[arg(long, default_value_t = 0, help = "Start block number for pagination")]
+        start_block: u64,
 
         #[arg(long, default_value = "netrascan/data/trainings", help = "Directory to write the training dataset JSONL")]
         out: String,
@@ -84,6 +100,9 @@ pub enum Command {
         #[arg(long, env = "ETHERSCAN_API_KEY", help = "Etherscan API key used to fetch transaction data")]
         etherscan_key: String,
 
+        #[arg(long, default_value_t = 0, help = "Start block number for pagination")]
+        start_block: u64,
+
         #[arg(long, default_value = "netrascan/data/raw/transactions.json", help = "Output file path for the fetched transaction JSON")]
         out: String,
     },
@@ -95,5 +114,57 @@ pub enum Command {
     Score {
         #[arg(value_name = "FILE", help = "Path to file containing transaction records for a single wallet")]
         input: String,
+    },
+
+    // =========================
+    //      Tx Inteface
+    // =========================
+
+    /// Scan the latest block and classify its transactions
+    ScanLatest {
+        #[arg(
+            long, 
+            default_value = "https://rpc.ankr.com/eth/6570a5941c65a2a7deffce485080569aa0bf85c6dc4b0f1dc95002557569af40", 
+            help = "RPC endpoint to use", 
+            env = "ETH_RPC_URL"
+        )]
+        rpc: String,
+    },
+
+    /// Scan a specific block by number
+    ScanBlock {
+        #[arg(help = "Ethereum block number to scan")]
+        block_number: u64,
+
+        #[arg(
+            long, 
+            default_value = "https://rpc.ankr.com/eth/6570a5941c65a2a7deffce485080569aa0bf85c6dc4b0f1dc95002557569af40", 
+            help = "RPC endpoint to use", 
+            env = "ETH_RPC_URL"
+        )]
+        rpc: String,
+    },
+
+    /// Classify a single transaction manually
+    Classify {
+        #[arg(help = "Transaction hash to classify")]
+        tx_hash: String,
+
+        #[arg(
+            long, 
+            default_value = "https://rpc.ankr.com/eth/6570a5941c65a2a7deffce485080569aa0bf85c6dc4b0f1dc95002557569af40", 
+            help = "RPC endpoint to use", 
+            env = "ETH_RPC_URL"
+        )]
+        rpc: String,
+    },
+
+    /// List known bridge and CEX addresses
+    ListHeuristics {
+        #[arg(long, help = "Show only bridge addresses")]
+        bridge_only: bool,
+
+        #[arg(long, help = "Show only CEX addresses")]
+        cex_only: bool,
     },
 }

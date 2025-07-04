@@ -4,7 +4,7 @@ use std::{
     path::Path,
 };
 
-use common::TxRecord;
+use common::model::TxRecord;
 use serde_json::{from_reader, from_str};
 
 pub fn read_wallets_from_file<P>(path: P) -> std::io::Result<Vec<String>>
@@ -30,7 +30,7 @@ pub fn read_tx_records(path: &str) -> std::io::Result<Vec<TxRecord>> {
     let reader = BufReader::new(file);
 
     if let Ok(records) = from_reader(reader) {
-        return Ok(records)
+        return Ok(records);
     }
 
     let file = File::open(path)?;
@@ -39,8 +39,8 @@ pub fn read_tx_records(path: &str) -> std::io::Result<Vec<TxRecord>> {
 
     for line in reader.lines() {
         let line = line?;
-        let record: TxRecord = from_str(&line)
-            .map_err(|e| std::io::Error::other(format!("Parse error: {e}")))?;
+        let record: TxRecord =
+            from_str(&line).map_err(|e| std::io::Error::other(format!("Parse error: {e}")))?;
         records.push(record);
     }
 

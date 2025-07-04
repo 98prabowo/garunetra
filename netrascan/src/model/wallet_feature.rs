@@ -1,6 +1,9 @@
 use std::collections::HashSet;
 
-use common::{dummy_price_lookup, TxRecord, TxSample};
+use common::{
+    model::{TxRecord, TxSample},
+    utils::dummy_price_lookup,
+};
 use serde::Serialize;
 
 #[derive(Debug, Serialize)]
@@ -39,7 +42,7 @@ impl WalletFeature {
             }
 
             println!("💰 USD: {:?}", tx.usd_value);
-            
+
             if let Some(usd) = tx.usd_value {
                 total_out_usd += usd;
                 if usd < 10.0 {

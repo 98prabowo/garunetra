@@ -1,4 +1,4 @@
-use common::{TxRecord, WalletType};
+use common::model::{TxRecord, WalletType};
 use serde::Serialize;
 
 #[derive(Debug, Serialize)]
@@ -16,10 +16,10 @@ impl WalletReport {
         category: WalletType,
         txs: &[TxRecord],
     ) -> Self {
-        Self { 
-            wallet: wallet.into(), 
-            score, 
-            category, 
+        Self {
+            wallet: wallet.into(),
+            score,
+            category,
             txs: txs.to_vec(),
         }
     }

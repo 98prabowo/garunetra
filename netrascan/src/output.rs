@@ -34,7 +34,7 @@ pub fn append_address_jsonl(path: &str, addresses: &HashSet<String>) -> std::io:
 }
 
 pub fn write_json<P, T>(path: P, value: &T) -> Result<()>
-where 
+where
     P: AsRef<Path>,
     T: Serialize,
 {
