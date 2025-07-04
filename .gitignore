@@ -52,3 +52,4 @@ Icon?
 *.svg
 *.jsonl
 netrascan/data/trainings/
+netrascan/data/heuristics/
