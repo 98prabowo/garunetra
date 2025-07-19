@@ -1,9 +1,0 @@
-[package]
-name = "netrawatch"
-version = "0.1.0"
-edition = "2021"
-authors = ["Garunetra Labs"]
-description = "Real-time anomaly detector and stream monitor for Garunetra"
-license = "MIT"
-
-[dependencies]

@@ -3,7 +3,7 @@ name = "netravue"
 version = "0.1.0"
 edition = "2021"
 authors = ["Garunetra Labs"]
-description = "Visualization server and frontend integration for Garunetra"
+description = "Dashboard to visualize capital outflow, AML/CTF label, and risk score of mainnet transaction data"
 license = "MIT"
 
 [dependencies]
