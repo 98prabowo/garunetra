@@ -38,7 +38,8 @@ impl TxClassified {
 pub fn classify_block(block: BlockEthereum, heuristics: &Heuristics) -> Vec<TxClassified> {
     let block_number = u64::from_str_radix(block.number.trim_start_matches("0x"), 16).unwrap_or(0);
 
-    block.transactions
+    block
+        .transactions
         .into_iter()
         .filter_map(|tx| {
             let category = tx.categorize(heuristics);

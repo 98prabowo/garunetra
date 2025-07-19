@@ -5,12 +5,12 @@ use chrono::{Datelike, Utc};
 use common::model::TxRecord;
 use netracrawl::etherscan::EtherscanClient;
 use netrascan::{
-    classification::classify_wallet, 
-    constants::DEFAULT_OFFSET, 
-    error::{Error, Result}, 
-    heuristics::calculate_score, 
-    input::{read_tx_records, read_wallets_from_file}, 
-    model::{WalletFeature, WalletReport}, 
+    classification::classify_wallet,
+    constants::DEFAULT_OFFSET,
+    error::{Error, Result},
+    heuristics::calculate_score,
+    input::{read_tx_records, read_wallets_from_file},
+    model::{WalletFeature, WalletReport},
     output::{append_address_jsonl, append_jsonl, write_json},
 };
 
