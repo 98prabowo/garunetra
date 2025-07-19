@@ -20,7 +20,8 @@ pub struct TxRecord {
 
 impl TxRecord {
     pub fn to_sample(&self, price_lookup: Option<PriceLookupFn>) -> Option<TxSample> {
-        let timestamp = self.time_stamp
+        let timestamp = self
+            .time_stamp
             .parse::<i64>()
             .ok()
             .and_then(|ts| Utc.timestamp_opt(ts, 0).single())?
@@ -60,10 +61,10 @@ impl TxRecord {
 
 impl From<TxResponse> for TxRecord {
     fn from(value: TxResponse) -> Self {
-        Self { 
-            from: value.from, 
-            to: value.to, 
-            token_symbol: value.token_symbol, 
+        Self {
+            from: value.from,
+            to: value.to,
+            token_symbol: value.token_symbol,
             time_stamp: value.time_stamp,
             value: value.value,
             contract_address: value.contract_address,

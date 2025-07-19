@@ -11,4 +11,3 @@ pub struct TxSample {
     pub contract_address: String,
     pub hash: String,
 }
-
