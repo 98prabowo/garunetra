@@ -3,11 +3,12 @@ name = "netraflow"
 version = "0.1.0"
 edition = "2021"
 authors = ["Garunetra Labs"]
-description = "Capital flow aggregator and reporter for Garunetra"
+description = "Continuously scanning, analyzing, and aggregating mainnet transaction data"
 license = "MIT"
 
 [dependencies]
 common = { path = "../common", version = "0.1.0" }
+netracrawl = { path = "../netracrawl", version = "0.1.0" }
 netrascan = { path = "../netrascan", version = "0.1.0" }
 
 # External dependencies

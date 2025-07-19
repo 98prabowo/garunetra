@@ -5,15 +5,19 @@ use std::{
     time::Duration,
 };
 
-use common::model::{FlowSummary, TxCategory};
-use netrascan::{heuristics::Heuristics, ingest::EtheriumClient};
+use common::{
+    model::{FlowSummary, TxCategory},
+    utils::Heuristics,
+};
+use netracrawl::ethereum::EthereumClient;
+use netrascan::classification::classify_block;
 use serde_json::from_str;
 
 use crate::{
-    aggregator::summarize_block, 
-    constants::REQUEST_PERIOD, 
-    error::{Error, Result}, 
-    monitor::FlowMonitor, 
+    aggregator::summarize_block,
+    constants::REQUEST_PERIOD,
+    error::{Error, Result},
+    monitor::FlowMonitor,
     storage::save_summary,
 };
 
@@ -24,20 +28,22 @@ where
     let mut latest_seen = 0;
 
     if !heuristics_path.as_ref().exists() {
-        return Err(Error::HeuristicsNotFound(heuristics_path.as_ref().to_string_lossy().into_owned()));
+        return Err(Error::HeuristicsNotFound(
+            heuristics_path.as_ref().to_string_lossy().into_owned(),
+        ));
     }
 
     let heuristics = Heuristics::load(heuristics_path)?;
     let mut flow_monitor = FlowMonitor::new(10);
 
     loop {
-        let client = EtheriumClient::new(rpc);
+        let client = EthereumClient::new(rpc);
         let block_number = client.get_latest_block_number().await?;
 
         if block_number > latest_seen {
             let block = client.get_block_by_number(block_number).await?;
-            let classified = block.classify(&heuristics);
-            
+            let classified = classify_block(block, &heuristics);
+
             let summary = summarize_block(&classified);
             save_summary(&summary, &out_path)?;
 
@@ -77,10 +83,7 @@ where
     let file = File::open(path)?;
     let reader = BufReader::new(file);
 
-    let lines: Vec<_> = reader
-        .lines()
-        .map_while(|line| line.ok())
-        .collect();
+    let lines: Vec<_> = reader.lines().map_while(|line| line.ok()).collect();
 
     let count = lines.len().min(latest);
 
@@ -93,8 +96,8 @@ where
 }
 
 pub fn init_directory<P>(path: P) -> Result<()>
-where 
-    P: AsRef<Path>
+where
+    P: AsRef<Path>,
 {
     create_dir_all(path)?;
     Ok(())
