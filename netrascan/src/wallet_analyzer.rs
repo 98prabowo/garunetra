@@ -1,16 +1,16 @@
 use std::{collections::HashSet, fs::create_dir_all};
 
 use chrono::{Datelike, Utc};
-use common::TxRecord;
 
+use common::model::TxRecord;
+use netracrawl::etherscan::EtherscanClient;
 use netrascan::{
-    classify::classify_wallet,
-    constants::DEFAULT_OFFSET,
-    error::{Error, Result},
-    heuristics::calculate_score,
-    ingest::{EtherscanClient, TransactionClient},
-    input::{read_tx_records, read_wallets_from_file},
-    model::{WalletFeature, WalletReport},
+    classification::classify_wallet, 
+    constants::DEFAULT_OFFSET, 
+    error::{Error, Result}, 
+    heuristics::calculate_score, 
+    input::{read_tx_records, read_wallets_from_file}, 
+    model::{WalletFeature, WalletReport}, 
     output::{append_address_jsonl, append_jsonl, write_json},
 };
 
@@ -199,8 +199,8 @@ pub async fn score(input: &str) -> Result<()> {
     Ok(())
 }
 
-async fn wallet_to_report<C: TransactionClient>(
-    client: &C,
+async fn wallet_to_report(
+    client: &EtherscanClient,
     wallet: &str,
     start_block: u64,
 ) -> Result<WalletReport> {
@@ -220,8 +220,8 @@ async fn wallet_to_report<C: TransactionClient>(
     Ok(WalletReport::new(wallet, score, category, &records))
 }
 
-async fn wallet_to_feature<C: TransactionClient>(
-    client: &C,
+async fn wallet_to_feature(
+    client: &EtherscanClient,
     wallet: &str,
     start_block: u64,
 ) -> Result<WalletFeature> {

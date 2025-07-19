@@ -1,10 +1,11 @@
 mod cli;
+mod tx_analyzer;
 mod wallet_analyzer;
 
 use clap::Parser;
 use cli::{Cli, Command};
 
-use netrascan::{error::Result, tx_analyzer};
+use netrascan::error::Result;
 
 #[tokio::main]
 async fn main() -> Result<()> {

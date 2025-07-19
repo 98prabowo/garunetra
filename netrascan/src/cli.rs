@@ -1,9 +1,5 @@
 use clap::{Parser, Subcommand};
 
-/// 🔍 `netrascan`: Wallet classifier based on behavioral heuristics
-///
-/// Scans a single Ethereum wallet using transaction data (from Etherscan)
-/// and classifies it into categories such as `Domestic`, `Foreign`, `Mixer`, etc.
 #[derive(Parser)]
 #[command(name = "netrascan")]
 #[command(author = "Garunetra Labs")]
@@ -19,7 +15,6 @@ pub enum Command {
     // =========================
     //      Wallet Interface
     // =========================
-    
     #[command(
         about = "Analyze a single Ethereum wallet",
         long_about = "Scans a wallet using Etherscan data and applies behavioral heuristics to classify it (e.g. Domestic, Foreign, Mixer)."
@@ -28,28 +23,43 @@ pub enum Command {
         #[arg(help = "Target wallet address to analyze")]
         wallet: String,
 
-        #[arg(long, env = "ETHERSCAN_API_KEY", help = "Etherscan API key used to fetch transaction data")]
+        #[arg(
+            long,
+            env = "ETHERSCAN_API_KEY",
+            help = "Etherscan API key used to fetch transaction data"
+        )]
         etherscan_key: String,
-        
+
         #[arg(long, default_value_t = 0, help = "Start block number for pagination")]
         start_block: u64,
     },
 
     #[command(
         about = "Run classification on a batch of wallet addresses",
-        long_about= "Reads a file containing wallet addresses, analyzes each one using Etherscan data, and outputs classification reports."
+        long_about = "Reads a file containing wallet addresses, analyzes each one using Etherscan data, and outputs classification reports."
     )]
     Batch {
-        #[arg(value_name = "FILE", help = "Path to a file with one wallet address per line")]
+        #[arg(
+            value_name = "FILE",
+            help = "Path to a file with one wallet address per line"
+        )]
         input: String,
 
-        #[arg(long, env = "ETHERSCAN_API_KEY", help = "Etherscan API key used to fetch transaction data")]
+        #[arg(
+            long,
+            env = "ETHERSCAN_API_KEY",
+            help = "Etherscan API key used to fetch transaction data"
+        )]
         etherscan_key: String,
 
         #[arg(long, default_value_t = 0, help = "Start block number for pagination")]
         start_block: u64,
 
-        #[arg(long, default_value = "netrascan/data/reports", help = "Directory to store the output JSONL reports")]
+        #[arg(
+            long,
+            default_value = "netrascan/data/reports",
+            help = "Directory to store the output JSONL reports"
+        )]
         out: String,
     },
 
@@ -61,13 +71,21 @@ pub enum Command {
         #[arg(long, help = "The known source wallet (e.g. a CEX deposit address)")]
         source: String,
 
-        #[arg(long, env = "ETHERSCAN_API_KEY", help = "Etherscan API key used to fetch transaction data")]
+        #[arg(
+            long,
+            env = "ETHERSCAN_API_KEY",
+            help = "Etherscan API key used to fetch transaction data"
+        )]
         etherscan_key: String,
 
         #[arg(long, default_value_t = 0, help = "Start block number for pagination")]
         start_block: u64,
 
-        #[arg(long, default_value = "netrascan/data/trainings", help = "Directory to save the crawled wallet address list")]
+        #[arg(
+            long,
+            default_value = "netrascan/data/trainings",
+            help = "Directory to save the crawled wallet address list"
+        )]
         out: String,
     },
 
@@ -79,13 +97,21 @@ pub enum Command {
         #[arg(long, help = "Path to file containing wallet addresses (one per line)")]
         input: String,
 
-        #[arg(long, env = "ETHERSCAN_API_KEY", help = "Etherscan API key used to fetch transaction data")]
+        #[arg(
+            long,
+            env = "ETHERSCAN_API_KEY",
+            help = "Etherscan API key used to fetch transaction data"
+        )]
         etherscan_key: String,
 
         #[arg(long, default_value_t = 0, help = "Start block number for pagination")]
         start_block: u64,
 
-        #[arg(long, default_value = "netrascan/data/trainings", help = "Directory to write the training dataset JSONL")]
+        #[arg(
+            long,
+            default_value = "netrascan/data/trainings",
+            help = "Directory to write the training dataset JSONL"
+        )]
         out: String,
     },
 
@@ -97,13 +123,21 @@ pub enum Command {
         #[arg(help = "Wallet address to fetch transaction history for")]
         wallet: String,
 
-        #[arg(long, env = "ETHERSCAN_API_KEY", help = "Etherscan API key used to fetch transaction data")]
+        #[arg(
+            long,
+            env = "ETHERSCAN_API_KEY",
+            help = "Etherscan API key used to fetch transaction data"
+        )]
         etherscan_key: String,
 
         #[arg(long, default_value_t = 0, help = "Start block number for pagination")]
         start_block: u64,
 
-        #[arg(long, default_value = "netrascan/data/raw/transactions.json", help = "Output file path for the fetched transaction JSON")]
+        #[arg(
+            long,
+            default_value = "netrascan/data/raw/transactions.json",
+            help = "Output file path for the fetched transaction JSON"
+        )]
         out: String,
     },
 
@@ -112,20 +146,22 @@ pub enum Command {
         long_about = "Reads a JSON or JSONL file of token transfers, scores it using heuristics, and outputs a classification result."
     )]
     Score {
-        #[arg(value_name = "FILE", help = "Path to file containing transaction records for a single wallet")]
+        #[arg(
+            value_name = "FILE",
+            help = "Path to file containing transaction records for a single wallet"
+        )]
         input: String,
     },
 
     // =========================
     //      Tx Inteface
     // =========================
-
     /// Scan the latest block and classify its transactions
     ScanLatest {
         #[arg(
-            long, 
-            default_value = "https://rpc.ankr.com/eth/6570a5941c65a2a7deffce485080569aa0bf85c6dc4b0f1dc95002557569af40", 
-            help = "RPC endpoint to use", 
+            long,
+            default_value = "https://rpc.ankr.com/eth/6570a5941c65a2a7deffce485080569aa0bf85c6dc4b0f1dc95002557569af40",
+            help = "RPC endpoint to use",
             env = "ETH_RPC_URL"
         )]
         rpc: String,
@@ -137,9 +173,9 @@ pub enum Command {
         block_number: u64,
 
         #[arg(
-            long, 
-            default_value = "https://rpc.ankr.com/eth/6570a5941c65a2a7deffce485080569aa0bf85c6dc4b0f1dc95002557569af40", 
-            help = "RPC endpoint to use", 
+            long,
+            default_value = "https://rpc.ankr.com/eth/6570a5941c65a2a7deffce485080569aa0bf85c6dc4b0f1dc95002557569af40",
+            help = "RPC endpoint to use",
             env = "ETH_RPC_URL"
         )]
         rpc: String,
@@ -151,9 +187,9 @@ pub enum Command {
         tx_hash: String,
 
         #[arg(
-            long, 
-            default_value = "https://rpc.ankr.com/eth/6570a5941c65a2a7deffce485080569aa0bf85c6dc4b0f1dc95002557569af40", 
-            help = "RPC endpoint to use", 
+            long,
+            default_value = "https://rpc.ankr.com/eth/6570a5941c65a2a7deffce485080569aa0bf85c6dc4b0f1dc95002557569af40",
+            help = "RPC endpoint to use",
             env = "ETH_RPC_URL"
         )]
         rpc: String,
