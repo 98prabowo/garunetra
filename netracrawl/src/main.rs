@@ -11,7 +11,9 @@ async fn main() -> Result<()> {
 
     match cli.command {
         Command::ScanLatest { rpc } => controller::scan_latest(&rpc).await?,
-        Command::ScanBlock { block_number, rpc, } => controller::scan_block(block_number, &rpc).await?,
+        Command::ScanBlock { block_number, rpc } => {
+            controller::scan_block(block_number, &rpc).await?
+        }
     }
 
     Ok(())

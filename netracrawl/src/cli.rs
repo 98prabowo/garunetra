@@ -15,9 +15,9 @@ pub enum Command {
     /// Scan the latest block and classify its transactions
     ScanLatest {
         #[arg(
-            long, 
-            default_value = "https://rpc.ankr.com/eth/6570a5941c65a2a7deffce485080569aa0bf85c6dc4b0f1dc95002557569af40", 
-            help = "RPC endpoint to use", 
+            long,
+            default_value = "https://rpc.ankr.com/eth/6570a5941c65a2a7deffce485080569aa0bf85c6dc4b0f1dc95002557569af40",
+            help = "RPC endpoint to use",
             env = "ETH_RPC_URL"
         )]
         rpc: String,
@@ -29,9 +29,9 @@ pub enum Command {
         block_number: u64,
 
         #[arg(
-            long, 
-            default_value = "https://rpc.ankr.com/eth/6570a5941c65a2a7deffce485080569aa0bf85c6dc4b0f1dc95002557569af40", 
-            help = "RPC endpoint to use", 
+            long,
+            default_value = "https://rpc.ankr.com/eth/6570a5941c65a2a7deffce485080569aa0bf85c6dc4b0f1dc95002557569af40",
+            help = "RPC endpoint to use",
             env = "ETH_RPC_URL"
         )]
         rpc: String,
