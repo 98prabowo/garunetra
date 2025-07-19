@@ -67,7 +67,7 @@ impl EthereumClient {
             .send()
             .await?
             .json::<Value>()
-            .await?; // Also auto-mapped
+            .await?;
 
         if let Some(error) = response.get("error") {
             let code = error.get("code").and_then(Value::as_i64).unwrap_or(0);

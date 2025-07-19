@@ -4,8 +4,6 @@ use crate::utils::Heuristics;
 
 use super::TxCategory;
 
-// use super::TxCategory;
-
 #[derive(Debug, Deserialize)]
 pub struct TxEthereum {
     pub hash: String,
